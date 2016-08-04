@@ -27,8 +27,8 @@ class golden_rules(object):
         :param restrict:  boolean which if true indicates to use only CHNOPS
         :return: True if the formula is outside restrictions
         """
-        if formula['C'] > c or formula['H'] > h or formula['N'] > n or formula['O'] > o or formula[
-            'P'] > p or formula['S'] > s:
+        if formula.get('C',0) > c or formula.get('H',0) > h or formula.get('N',0) > n or formula.get('O',0) > o or formula.get(
+            'P',0) > p or formula.get('S',0) > s:
             return True
         else:
             return False
@@ -89,8 +89,8 @@ class golden_rules(object):
         :param formula: a formula
         :return: True if the formula passed this test
         """
-        if formula['C'] > 0 and formula['H'] > 0:
-            h_c_ratio = (1.0*formula['H']) / (1.0*formula['C'])
+        if formula.get('C',0) > 0 and formula.get('H',0) > 0:
+            h_c_ratio = (1.0*formula.get('H',0)) / (1.0*formula.get('C',0))
             if not (6 > h_c_ratio > 0.1):
                 return False
         return True
@@ -101,11 +101,11 @@ class golden_rules(object):
         :param formula: a formula
         :return: True if the formula passed this test
         """
-        if formula['C'] > 0:
-            n_c_ratio = formula['N'] / formula['C'] * 1.0
-            o_c_ratio = formula['O'] / formula['C'] * 1.0
-            p_c_ratio = formula['P'] / formula['C'] * 1.0
-            s_c_ratio = formula['S'] / formula['C'] * 1.0
+        if formula.get('C',0) > 0:
+            n_c_ratio = formula.get('N',0) / formula.get('C',0) * 1.0
+            o_c_ratio = formula.get('O',0) / formula.get('C',0) * 1.0
+            p_c_ratio = formula.get('P',0) / formula.get('C',0) * 1.0
+            s_c_ratio = formula.get('S',0) / formula.get('C',0) * 1.0
             if not (4 > n_c_ratio and 3 > o_c_ratio and 2 > p_c_ratio and 3 > s_c_ratio):
                 return False
         return True
@@ -116,10 +116,10 @@ class golden_rules(object):
         :param formula: a formula
         :return: True if the formula passed this test
         """
-        n = formula['N']
-        o = formula['O']
-        p = formula['P']
-        s = formula['S']
+        n = formula.get('N',0)
+        o = formula.get('O',0)
+        p = formula.get('P',0)
+        s = formula.get('S',0)
         if (n > 1 and o > 1 and p > 1 and s > 1 and not (n < 10 and o < 20 and p < 4 and s < 3)) or \
                 (n > 3 and p > 3 and p > 3 and not (n < 11 and o < 22 and p < 6)) or \
                 (o > 1 and p > 1 and s > 1 and not (o < 14 and p < 3 and s < 3)) or \

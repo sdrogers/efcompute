@@ -8,11 +8,18 @@ class ef_assigner(object):
     
     def __init__(self, scale_factor=1000, enforce_ppm=True, do_7_rules=True, 
                  second_stage=False, rule_8_max_occurrences=None,
-                 verbose = True):
+                 verbose = True,atom_list = None):
 
         self.verbose = verbose
-        self.atoms = list(ATOM_NAME_LIST) # copy
-        self.atom_masses = dict(ATOM_MASSES)
+        if not atom_list:
+            self.atoms = list(ATOM_NAME_LIST) # copy
+            self.atom_masses = dict(ATOM_MASSES)
+        else:
+            self.atoms = atom_list
+            all_atom_masses = dict(ATOM_MASSES)
+            self.atom_masses = {}
+            for atom in self.atoms:
+                self.atom_masses[atom] = all_atom_masses[atom]
 
         self.do_7_rules = do_7_rules
         if self.do_7_rules:
